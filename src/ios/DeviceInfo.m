@@ -14,6 +14,7 @@
  */
 
 #import "DeviceInfo.h"
+#import "TargetConditionals.h"
 
 
 @implementation DeviceInfo
@@ -37,9 +38,12 @@
     CDVPluginResult* pluginResult;
     
     if (id != NULL) {
-        //pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:[id UUIDString]];
+#if !(TARGET_IPHONE_SIMULATOR)
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:[id UUIDString]];
+#else
         // as the ID keeps changing with every new instance of iPhone Simulator, we want to keep a constant one for testing
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"80EA5A3B-7BB1-4EF6-AB53-8A72EF37"];
+#endif
     } else {
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_NO_RESULT];
     }
