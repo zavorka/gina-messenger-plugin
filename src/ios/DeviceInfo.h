@@ -27,12 +27,15 @@
     UIDevice *currentDevice;
 }
 
+@property (nonatomic, retain) UIDevice *currentDevice;
+
 // "IMEI" - in fact it will be the identifierForVendor
--(id) getIMEI: (CDVInvokedUrlCommand*)command;
+-(void) getIMEI: (CDVInvokedUrlCommand*)command;
 
-
+/*
 -(int) getBatteryLevel: (CDVInvokedUrlCommand*)command;
 -(void) playInputClick: (CDVInvokedUrlCommand*)command;
 -(bool) isThisPhone: (CDVInvokedUrlCommand*)command;
+ */
 
 @end

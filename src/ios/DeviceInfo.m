@@ -26,14 +26,27 @@
     
     if (self) {
         currentDevice = [UIDevice currentDevice];
-        NSLog(@"DeviceInfo class instance initialized");
     }
     
     return self;
 }
 
--(id) getIMEI:(CDVInvokedUrlCommand*)command {
-    NSUUID *id = [currentDevice identifier];
+-(void) getIMEI:(CDVInvokedUrlCommand*)command {
+    NSUUID *id = [currentDevice identifierForVendor];
+    
+    CDVPluginResult* pluginResult;
+    
+    if (id != NULL) {
+        //pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:[id UUIDString]];
+        // as the ID keeps changing with every new instance of iPhone Simulator, we want to keep a constant one for testing
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"80EA5A3B-7BB1-4EF6-AB53-8A72EF37"];
+    } else {
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_NO_RESULT];
+    }
+    
+    NSLog(@"identifierForVendor is %@", [id UUIDString]);
+    
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
 
