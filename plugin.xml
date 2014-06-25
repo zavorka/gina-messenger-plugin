@@ -3,7 +3,7 @@
 <plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
            id="com.ginasystem.plugins"
       version="0.1.0">
-    <name>GinaPlugin/name>
+    <name>GinaPlugin</name>
     <description>GinaPlugin PhoneGap Plugin used to get a unique device identifier used for signing into GINA network and other awesome stuff.</description>
 
     <!-- O'rly, Luke? -->
@@ -37,7 +37,7 @@
     <platform name="ios">
         <config-file target="config.xml" parent="/*">
             <feature name="GinaPlugin">
-                <param name="ios-package" value="Gi" />
+                <param name="ios-package" value="GinaPlugin" />
             </feature>
         </config-file>
 
