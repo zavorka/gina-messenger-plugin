@@ -3,8 +3,8 @@
 <plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
            id="com.ginasystem.plugins"
       version="0.1.0">
-    <name>DeviceInfo</name>
-    <description>DeviceInfo PhoneGap Plugin used to get a unique device identifier used for signing into GINA networkß.</description>
+    <name>GinaPlugin/name>
+    <description>GinaPlugin PhoneGap Plugin used to get a unique device identifier used for signing into GINA network and other awesome stuff.</description>
 
     <!-- O'rly, Luke? -->
     <license>MIT</license>
@@ -12,30 +12,32 @@
     <keywords>phonegap</keywords>
 ß
 
-    <js-module src="www/deviceinfo.js" name="DeviceInfo">
-        <clobbers target="window.deviceinfo" />
+    <js-module src="www/ginaplugin.js" name="GinaPlugin">
+        <clobbers target="window.ginaplugin" />
     </js-module>
 
     <!-- android -->
     <platform name="android">
         <config-file target="res/xml/config.xml" parent="/*">
-            <feature name="DeviceInfo">
-                <param name="android-package" value="com.ginasystem.plugins.DeviceInfo"/>
+            <feature name="GinaPlugin">
+                <param name="android-package" value="com.ginasystem.plugins.GinaPlugin"/>
             </feature>
         </config-file>
 
-        <source-file src="src/android/DeviceInfo.java" target-dir="src/com/ginasystem/plugins" />
+        <source-file src="src/android/GinaPlugin.java" target-dir="src/com/ginasystem/plugins" />
         
         <config-file target="AndroidManifest.xml" parent="/manifest">
             <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+            <uses-permission android:name="android.permission.INTERNET" />
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
         </config-file>      
      </platform>   
 
      <!-- ios -->
     <platform name="ios">
         <config-file target="config.xml" parent="/*">
-            <feature name="DeviceInfo">
-                <param name="ios-package" value="DeviceInfo" />
+            <feature name="GinaPlugin">
+                <param name="ios-package" value="Gi" />
             </feature>
         </config-file>
 
