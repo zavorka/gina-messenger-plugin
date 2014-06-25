@@ -13,7 +13,7 @@ var ginaplugin = {
     	cordova.exec(onSuccess, onError, 'DeviceInfo', 'getImageFromZip', [zipPath, entryPath]);
     }
 
-    doNavigate: function(onSuccess, onError)
+    doNavigate: function(onSuccess, onError) {
             if !(device?) {
                 window.open("http://maps.google.com/maps?daddr=" + lat + "," + lon);
                 onSuccess?();
