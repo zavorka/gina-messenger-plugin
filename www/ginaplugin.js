@@ -11,7 +11,7 @@ var ginaplugin = {
     
     getImageFromZip: function(onSuccess, onError, zipPath, entryPath) {
     	cordova.exec(onSuccess, onError, 'GinaPlugin', 'getImageFromZip', [zipPath, entryPath]);
-    }
+    },
 
     doNavigate: function(onSuccess, onError) {
         if !(device?) {
