@@ -6,6 +6,7 @@ var ginaplugin = {
      * @param {function(string)} onError Called with one param - string containing error
      */                    
     getIMEI: function(onSuccess, onError) {
+        console.log('GinaPlugin getIMEI');
         cordova.exec(onSuccess, onError, 'GinaPlugin', 'getIMEI', []);    
     },
     
@@ -14,6 +15,7 @@ var ginaplugin = {
     },
 
     doNavigate: function(onSuccess, onError) {
+        console.log('GinaPlugin doNavigate');
         if !(device?) {
             window.open("http://maps.google.com/maps?daddr=" + lat + "," + lon);
             onSuccess?();
