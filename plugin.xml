@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
-           id="com.ginasystem.plugins"
+           id="com.ginasystem.plugins.GinaPlugin"
       version="0.1.0">
     <name>GinaPlugin</name>
     <description>GinaPlugin PhoneGap Plugin used to get a unique device identifier used for signing into GINA network and other awesome stuff.</description>
