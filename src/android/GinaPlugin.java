@@ -23,7 +23,7 @@ import android.telephony.TelephonyManager;
 import android.util.Base64;
 
 
-public class DeviceInfo extends CordovaPlugin {
+public class GinaPlugin extends CordovaPlugin {
     public static final String ACTION_GET_IMEI = "getIMEI";
     public static final String ACTION_GET_ZIP = "getImageFromZip";
     
@@ -64,16 +64,16 @@ public class DeviceInfo extends CordovaPlugin {
             String lon = args.getString(1);
             
             if (lat != null && lat.length() > 0 && lon != null && lon.length() > 0) {
-                Log.d(LOG_TAG, "Navigating to lat="+lat+", lon="+lon);
+                //Log.d(LOG_TAG, "Navigating to lat="+lat+", lon="+lon);
                 Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("google.navigation:q=" + lat +","+ lon)); 
                 this.cordova.getActivity().startActivity(i);
                 result = true;
             } else {                
-                Log.d(LOG_TAG, "Expected two non-empty string arguments for lat and lon." );
+                //Log.d(LOG_TAG, "Expected two non-empty string arguments for lat and lon." );
                 result = false;
             }           
         }catch( JSONException e ) {
-            Log.d(LOG_TAG, "Exception occurred: ".concat(e.getMessage()));
+            //Log.d(LOG_TAG, "Exception occurred: ".concat(e.getMessage()));
             result = false;
         }        
         return result;
