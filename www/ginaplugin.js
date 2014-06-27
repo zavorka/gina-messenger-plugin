@@ -20,7 +20,7 @@ var ginaplugin = {
             window.open("http://maps.google.com/maps?daddr=" + lat + "," + lon);
             onSuccess();
         }
-        # Use a plugin to execute an Intent on Android.
+        // Use a plugin to execute an Intent on Android.
         else if (device.platform === "Android")
             cordova.exec(onSuccess, onError, 'PhoneNavigator', 'doNavigate', [lat, lon]);
         else if (device.platform == "iOS") {
