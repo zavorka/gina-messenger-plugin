@@ -16,16 +16,16 @@ var ginaplugin = {
 
     doNavigate: function(onSuccess, onError) {
         console.log('GinaPlugin doNavigate');
-        if !(device?) {
+        if (device == nunll) {
             window.open("http://maps.google.com/maps?daddr=" + lat + "," + lon);
-            onSuccess?();
+            onSuccess();
         }
         # Use a plugin to execute an Intent on Android.
         else if (device.platform === "Android")
             cordova.exec(onSuccess, onError, 'PhoneNavigator', 'doNavigate', [lat, lon]);
         else if (device.platform == "iOS") {
             window.location = "maps:daddr=" + lat + "," + lon;
-            onSuccess?();
+            onSuccess();
         }
         else {
             console.log("Unknown platform.");

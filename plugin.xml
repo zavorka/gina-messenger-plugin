@@ -10,7 +10,6 @@
     <license>MIT</license>
 
     <keywords>phonegap</keywords>
-ß
 
     <js-module src="www/ginaplugin.js" name="GinaPlugin">
         <clobbers target="window.ginaplugin" />
