@@ -14,22 +14,23 @@ var ginaplugin = {
     }
 
     doNavigate: function(onSuccess, onError) {
-            if !(device?) {
-                window.open("http://maps.google.com/maps?daddr=" + lat + "," + lon);
-                onSuccess?();
-            }
-            # Use a plugin to execute an Intent on Android.
-            else if (device.platform === "Android")
-                cordova.exec(onSuccess, onError, 'PhoneNavigator', 'doNavigate', [lat, lon]);
-            else if (device.platform == "iOS") {
-                window.location = "maps:daddr=" + lat + "," + lon;
-                onSuccess?();
-            }
-            else {
-                console.log("Unknown platform.");
-                window.location = "http://maps.google.com/maps?daddr=" + lat + "," + lon;
-                onSuccess();
-            }
+        if !(device?) {
+            window.open("http://maps.google.com/maps?daddr=" + lat + "," + lon);
+            onSuccess?();
+        }
+        # Use a plugin to execute an Intent on Android.
+        else if (device.platform === "Android")
+            cordova.exec(onSuccess, onError, 'PhoneNavigator', 'doNavigate', [lat, lon]);
+        else if (device.platform == "iOS") {
+            window.location = "maps:daddr=" + lat + "," + lon;
+            onSuccess?();
+        }
+        else {
+            console.log("Unknown platform.");
+            window.location = "http://maps.google.com/maps?daddr=" + lat + "," + lon;
+            onSuccess();
+        }
+    }
 }
 
 
