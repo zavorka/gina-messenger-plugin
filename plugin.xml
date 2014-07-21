@@ -45,5 +45,13 @@
         <source-file src="src/ios/DeviceInfo.m" />
 
         <framework src="UIKit.framework" />
-    </platform>       
+    </platform>   
+
+	<!-- windows8 -->
+    <platform name="windows8">
+        <js-module src="src/windows8/GinaPlugin.js" name="GinaPlugin">
+            <merges target="" />
+        </js-module>
+    </platform>
+    
 </plugin>
