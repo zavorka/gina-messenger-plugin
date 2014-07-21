@@ -1,4 +1,4 @@
-var ginaplugin = {
+﻿module.exports = {
     
     /**
      * Get device IMEI
@@ -33,7 +33,4 @@ var ginaplugin = {
             onSuccess();
         }
     }
-}
-
-
-module.exports = ginaplugin;
+};

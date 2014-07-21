@@ -11,7 +11,7 @@
 
     <keywords>phonegap</keywords>
 
-    <js-module src="www/ginaplugin.js" name="GinaPlugin">
+    <js-module src="www/GinaPlugin.js" name="GinaPlugin">
         <clobbers target="window.ginaplugin" />
     </js-module>
 
@@ -49,7 +49,7 @@
 
 	<!-- windows8 -->
     <platform name="windows8">
-        <js-module src="src/windows8/GinaPlugin.js" name="GinaPlugin">
+        <js-module src="src/windows8/GinaPluginProxy.js" name="GinaPluginProxy">
             <merges target="" />
         </js-module>
     </platform>

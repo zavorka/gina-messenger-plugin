@@ -15,7 +15,7 @@ module.exports = {
 		var reader = Windows.Storage.Streams.DataReader.fromBuffer(hardwareToken.id);
 		var guid = reader.readGuid();
 		
-		if guid?
+		if (typeof guid !== 'undefined')
 			onSuccess(guid);
 		else
 			onError();
