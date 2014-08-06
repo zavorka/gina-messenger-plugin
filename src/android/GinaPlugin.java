@@ -68,7 +68,7 @@ public class GinaPlugin extends CordovaPlugin {
             
             if (lat != null && lat.length() > 0 && lon != null && lon.length() > 0) {
                 Log.d(LOG_TAG, "Navigating to lat="+lat+", lon="+lon);
-                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("google.navigation:q=" + lat +","+ lon)); 
+                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q=" + lat +","+ lon)); 
                 this.cordova.getActivity().startActivity(i);
                 result = true;
             } else {                
