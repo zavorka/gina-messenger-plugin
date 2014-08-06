@@ -46,7 +46,7 @@ public class GinaPlugin extends CordovaPlugin {
                 this.getZipToBase64(zipPath, entryPath, callbackContext);
             }
             if ("doNavigate".equals(action)){                       
-                return this.doNavigate(args);
+                return this.doNavigate(args.get(0).toString(), args.get(1).toString(), args.get(2).toString(), callbackContext);
             }
 
             
@@ -59,24 +59,22 @@ public class GinaPlugin extends CordovaPlugin {
         } 
     }
 
-    private boolean doNavigate(JSONArray args){
+    private boolean doNavigate(String lat, String lon, String label, CallbackContext callbackContext){
         boolean result;
         
-        try {
-            String lat = args.getString(0);
-            String lon = args.getString(1);
-            
+        try {            
             if (lat != null && lat.length() > 0 && lon != null && lon.length() > 0) {
                 Log.d(LOG_TAG, "Navigating to lat="+lat+", lon="+lon);
-                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q=" + lat +","+ lon)); 
+                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q=" + lat +","+ lon + " (" + label + ")")); 
                 this.cordova.getActivity().startActivity(i);
                 result = true;
+				callbackContext.success();
             } else {                
-                Log.d(LOG_TAG, "Expected two non-empty string arguments for lat and lon." );
+                callbackContext.error("Expected two non-empty string arguments for lat and lon.");
                 result = false;
             }           
-        }catch( JSONException e ) {
-            Log.d(LOG_TAG, "Exception occurred: ".concat(e.getMessage()));
+        }catch( Exception e ) {
+            callbackContext.error(e.getMessage());
             result = false;
         }        
         return result;
