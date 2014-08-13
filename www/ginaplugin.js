@@ -14,16 +14,16 @@
     	cordova.exec(onSuccess, onError, 'GinaPlugin', 'getImageFromZip', [zipPath, entryPath]);
     },
 
-    doNavigate: function(onSuccess, onError) {
+    doNavigate: function(onSuccess, onError, lat, lon, label) {
         console.log('GinaPlugin doNavigate');
-        if (device == nunll) {
+        if (device == null) {
             window.open("http://maps.google.com/maps?daddr=" + lat + "," + lon);
             onSuccess();
         }
         // Use a plugin to execute an Intent on Android.
         else if (device.platform === "Android")
-            cordova.exec(onSuccess, onError, 'PhoneNavigator', 'doNavigate', [lat, lon]);
-        else if (device.platform == "iOS") {
+            cordova.exec(onSuccess, onError, 'GinaPlugin', 'doNavigate', [lat, lon, label]);
+        else if (device.platform === "iOS") {
             window.location = "maps:daddr=" + lat + "," + lon;
             onSuccess();
         }
