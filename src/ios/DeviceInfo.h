@@ -23,7 +23,7 @@
 
 #import "AppDelegate.h"
 
-@interface DeviceInfo : CDVPlugin {
+@interface GinaPlugin : CDVPlugin {
     UIDevice *currentDevice;
 }
 

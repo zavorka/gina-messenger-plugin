@@ -17,13 +17,13 @@
 #import "TargetConditionals.h"
 
 
-@implementation DeviceInfo
+@implementation GinaPlugin
 
 @synthesize currentDevice;
 
 -(CDVPlugin*) initWithWebView:(UIWebView*) theWebView
 {
-    self = (DeviceInfo*)[super initWithWebView:theWebView];
+    self = (GinaPlugin*)[super initWithWebView:theWebView];
     
     if (self) {
         currentDevice = [UIDevice currentDevice];
