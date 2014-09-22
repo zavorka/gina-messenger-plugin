@@ -22,6 +22,13 @@ import android.content.Context;
 import android.telephony.TelephonyManager;
 import android.util.Base64;
 
+import android.content.pm.ActivityInfo;
+
+import org.apache.cordova.CallbackContext;
+import org.apache.cordova.CordovaInterface;
+import org.apache.cordova.CordovaPlugin;
+import org.apache.cordova.CordovaWebView;
+
 
 public class GinaPlugin extends CordovaPlugin {
     private static final String LOG_TAG = "GinaPlugin";
@@ -53,7 +60,7 @@ public class GinaPlugin extends CordovaPlugin {
             }
 
             if (ACTION_LOCK_ORIENTATION.equals(action)) {
-                this.lockOrientation(args[0]);
+                this.lockOrientation(args.get(0).toString());
             }
 
             if (ACTION_UNLOCK_ORIENTATION.equals(action)) {
