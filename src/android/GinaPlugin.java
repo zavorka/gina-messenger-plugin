@@ -175,7 +175,7 @@ public class GinaPlugin extends CordovaPlugin {
         this.cordova.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
     }
 
-    private void lockOrienation(String orientation) {
+    private void lockOrientation(String orientation) {
         if (orientation.equals("portrait"))
             this.cordova.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         else if (orientation.equals("landscape"))
