@@ -27,6 +27,9 @@ public class GinaPlugin extends CordovaPlugin {
     private static final String LOG_TAG = "GinaPlugin";
     public static final String ACTION_GET_IMEI = "getIMEI";    
     public static final String ACTION_GET_ZIP = "getImageFromZip";
+    public static final String ACTION_LOCK_ORIENTATION = "lockOrientation";
+    public static final String ACTION_UNLOCK_ORIENTATION = "unlockOrientation";
+    public static final String ACTION_DO_NAVIGATE = "doNavigate";
     
     
     
@@ -49,6 +52,15 @@ public class GinaPlugin extends CordovaPlugin {
                 return this.doNavigate(args.get(0).toString(), args.get(1).toString(), args.get(2).toString(), callbackContext);
             }
 
+            if (ACTION_LOCK_ORIENTATION.equals(action)) {
+                this.lockOrientation(args[0]);
+            }
+
+            if (ACTION_UNLOCK_ORIENTATION.equals(action)) {
+                this.unlockOrientation();
+                callbackContext.success();
+            }
+
             
             callbackContext.error("Invalid action");
             return false;
@@ -68,7 +80,7 @@ public class GinaPlugin extends CordovaPlugin {
                 Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:" + lat +","+ lon + "?q=" + lat + "," + lon)); 
                 this.cordova.getActivity().startActivity(i);
                 result = true;
-				callbackContext.success();
+                callbackContext.success();
             } else {                
                 callbackContext.error("Expected two non-empty string arguments for lat and lon.");
                 result = false;
@@ -150,5 +162,16 @@ public class GinaPlugin extends CordovaPlugin {
         finally {
              
         }
-    }   
+    } 
+
+    private void unlockOrientation() {
+        this.cordova.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+    }
+
+    private void lockOrienation(String orientation) {
+        if (orientation.equals("portrait"))
+            this.cordova.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        else if (orientation.equals("landscape"))
+            this.cordova.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+    }  
 }
