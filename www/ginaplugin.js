@@ -15,8 +15,8 @@
     },
 
 		lockOrientation: function(orientation) {
-			cordova.exec(null, null, 'GinaPlugin', 'lockOrientation', [orientation])
-		}
+			cordova.exec(null, null, 'GinaPlugin', 'lockOrientation', [orientation]);
+		},
 
     doNavigate: function(onSuccess, onError, lat, lon, label) {
         console.log('GinaPlugin doNavigate');
