@@ -14,6 +14,10 @@
     	cordova.exec(onSuccess, onError, 'GinaPlugin', 'getImageFromZip', [zipPath, entryPath]);
     },
 
+		lockOrientation: function(orientation) {
+			cordova.exec(null, null, 'GinaPlugin', 'lockOrientation', [orientation])
+		}
+
     doNavigate: function(onSuccess, onError, lat, lon, label) {
         console.log('GinaPlugin doNavigate');
         if (device == null) {
