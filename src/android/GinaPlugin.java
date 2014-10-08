@@ -1,5 +1,7 @@
 package com.ginasystem.plugins;
  
+import android.os.Environment;
+
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.util.zip.ZipEntry;
