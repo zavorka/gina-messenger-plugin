@@ -37,4 +37,20 @@
             onSuccess();
         }
     }
+
+    launchAirNavigation: function(onSuccess, onError, lat, lon, label) {
+        if (device == null) {
+            window.open("http://maps.google.com/maps?daddr=" + lat + "," + lon);
+            onSuccess();
+        }
+        else if (device.platform === "iOS") {
+            window.location = "airnavpro://direct-to?coordinates=wgs84-decimal&location=" + lat + "_" + lon + ",0.0," + label;
+            onSuccess();
+        }
+        else {
+            console.log("Unknown platform.");
+            window.location = "http://maps.google.com/maps?daddr=" + lat + "," + lon;
+            onSuccess();
+        }
+    }
 };
