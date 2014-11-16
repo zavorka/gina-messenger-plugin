@@ -11,12 +11,12 @@
     },
     
     getImageFromZip: function(onSuccess, onError, zipPath, entryPath) {
-    	cordova.exec(onSuccess, onError, 'GinaPlugin', 'getImageFromZip', [zipPath, entryPath]);
+        cordova.exec(onSuccess, onError, 'GinaPlugin', 'getImageFromZip', [zipPath, entryPath]);
     },
 
-		lockOrientation: function(orientation) {
-			cordova.exec(null, null, 'GinaPlugin', 'lockOrientation', [orientation]);
-		},
+    lockOrientation: function(orientation) {
+        cordova.exec(null, null, 'GinaPlugin', 'lockOrientation', [orientation]);
+    },
 
     doNavigate: function(onSuccess, onError, lat, lon, label) {
         console.log('GinaPlugin doNavigate');
@@ -36,7 +36,7 @@
             window.location = "http://maps.google.com/maps?daddr=" + lat + "," + lon;
             onSuccess();
         }
-    }
+    },
 
     launchAirNavigation: function(onSuccess, onError, lat, lon, label) {
         if (device == null) {
