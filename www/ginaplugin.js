@@ -52,5 +52,9 @@
             window.location = "http://maps.google.com/maps?daddr=" + lat + "," + lon;
             onSuccess();
         }
+    },
+
+    turnOnDisplay: function() {
+        cordova.exec(null, null, 'GinaPlugin', 'turnOnDisplay', []);
     }
 };

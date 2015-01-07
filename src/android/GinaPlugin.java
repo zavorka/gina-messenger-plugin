@@ -31,6 +31,11 @@ import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CordovaWebView;
 
+// for turnOnDisplay
+import android.view.WindowManager;
+import android.view.Window;
+import android.os.PowerManager;
+
 
 public class GinaPlugin extends CordovaPlugin {
     private static final String LOG_TAG = "GinaPlugin";
@@ -39,6 +44,7 @@ public class GinaPlugin extends CordovaPlugin {
     public static final String ACTION_LOCK_ORIENTATION = "lockOrientation";
     public static final String ACTION_UNLOCK_ORIENTATION = "unlockOrientation";
     public static final String ACTION_DO_NAVIGATE = "doNavigate";
+    public static final String ACTION_TURN_ON_DISPLAY = "turnOnDisplay";
     
     
     
@@ -47,8 +53,8 @@ public class GinaPlugin extends CordovaPlugin {
         try {
             if (ACTION_GET_IMEI.equals(action)) {
                 Log.d(LOG_TAG, "getIMEI");
-            	TelephonyManager telephonyManager = (TelephonyManager) this.cordova.getActivity().getSystemService(Context.TELEPHONY_SERVICE);
-            	String IMEI = telephonyManager.getDeviceId();
+                TelephonyManager telephonyManager = (TelephonyManager) this.cordova.getActivity().getSystemService(Context.TELEPHONY_SERVICE);
+                String IMEI = telephonyManager.getDeviceId();
                 Log.d(LOG_TAG, "getIMEI success: " + IMEI);
                 callbackContext.success(IMEI);               
             }
@@ -57,7 +63,7 @@ public class GinaPlugin extends CordovaPlugin {
                 String entryPath = args.get(1).toString();
                 this.getZipToBase64(zipPath, entryPath, callbackContext);
             }
-            if ("doNavigate".equals(action)){                       
+            if (ACTION_DO_NAVIGATE.equals(action)){                       
                 return this.doNavigate(args.get(0).toString(), args.get(1).toString(), args.get(2).toString(), callbackContext);
             }
 
@@ -68,6 +74,12 @@ public class GinaPlugin extends CordovaPlugin {
             if (ACTION_UNLOCK_ORIENTATION.equals(action)) {
                 this.unlockOrientation();
                 callbackContext.success();
+            }
+
+            if (ACTION_TURN_ON_DISPLAY.equals(action)) {
+                this.turnOnDisplay();
+                callbackContext.success();
+                return true;
             }
 
             
@@ -183,4 +195,21 @@ public class GinaPlugin extends CordovaPlugin {
         else if (orientation.equals("landscape"))
             this.cordova.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
     }  
+
+    public void turnOnDisplay() 
+    {
+        this.cordova.getActivity().runOnUiThread(new Runnable() {
+            public void run() {
+                Activity activity = cordova.getActivity();
+                
+                Window window = activity.getWindow();
+                window.addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
+                window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+                WindowManager.LayoutParams params = window.getAttributes();
+                params.screenBrightness = 1.0f;
+                window.setAttributes(params);                
+            }       
+        });
+    }
 }
