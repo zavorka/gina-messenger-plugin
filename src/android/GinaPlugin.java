@@ -200,15 +200,29 @@ public class GinaPlugin extends CordovaPlugin {
     {
         this.cordova.getActivity().runOnUiThread(new Runnable() {
             public void run() {
-                Activity activity = cordova.getActivity();
-                
+                Activity activity = cordova.getActivity();                
                 Window window = activity.getWindow();
+
+                // turn on screen and set brightness to full
                 window.addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
                 window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
                 WindowManager.LayoutParams params = window.getAttributes();
                 params.screenBrightness = 1.0f;
                 window.setAttributes(params);                
+
+                // wake from sleep
+                PowerManager pm = (PowerManager) activity.getApplicationContext().getSystemService(Context.POWER_SERVICE);
+                PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.ACQUIRE_CAUSES_WAKEUP | PowerManager.SCREEN_BRIGHT_WAKE_LOCK | PowerManager.FULL_WAKE_LOCK, "GinaPlugin Wake");
+                // we acquire the wakelock just for wake up (ACQUIRE_CAUSES_WAKEUP flag)... then we immediatly release
+                wl.acquire();
+                wl.release();
+
+                // bring to front
+                Intent it = new Intent("intent.my.action");
+                it.setComponent(  new ComponentName( activity.getPackageName(), activity.getClass().getName() )  );
+                it.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                activity.getApplicationContext().startActivity(it);               
             }       
         });
     }
