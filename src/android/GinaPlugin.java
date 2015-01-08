@@ -35,6 +35,7 @@ import org.apache.cordova.CordovaWebView;
 import android.view.WindowManager;
 import android.view.Window;
 import android.os.PowerManager;
+import android.content.ComponentName;
 
 
 public class GinaPlugin extends CordovaPlugin {
