@@ -45,7 +45,7 @@ public class GinaPlugin extends CordovaPlugin {
     public static final String ACTION_LOCK_ORIENTATION = "lockOrientation";
     public static final String ACTION_UNLOCK_ORIENTATION = "unlockOrientation";
     public static final String ACTION_DO_NAVIGATE = "doNavigate";
-    public static final String ACTION_TURN_ON_DISPLAY = "turnOnDisplay";
+    public static final String ACTION_WAKE_UP_AND_BRING_TO_FRONT = "wakeUpAndBringToFront";
     
     
     
@@ -77,8 +77,8 @@ public class GinaPlugin extends CordovaPlugin {
                 callbackContext.success();
             }
 
-            if (ACTION_TURN_ON_DISPLAY.equals(action)) {
-                this.turnOnDisplay();
+            if (ACTION_WAKE_UP_AND_BRING_TO_FRONT.equals(action)) {
+                this.wakeUpAndBringToFront();
                 callbackContext.success();
                 return true;
             }
@@ -197,33 +197,42 @@ public class GinaPlugin extends CordovaPlugin {
             this.cordova.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
     }  
 
-    public void turnOnDisplay() 
+    
+
+    private void wakeUp(Activity activity) {
+            PowerManager pm = (PowerManager) activity.getApplicationContext().getSystemService(Context.POWER_SERVICE);
+            PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.ACQUIRE_CAUSES_WAKEUP | PowerManager.SCREEN_BRIGHT_WAKE_LOCK | PowerManager.FULL_WAKE_LOCK, "GinaPlugin Wake");
+            // we acquire the wakelock just for wake up (ACQUIRE_CAUSES_WAKEUP flag)... then we immediatly release
+            wl.acquire();
+            wl.release();
+    }
+
+    private void turnOnDisplay(Activity activity) {
+        Window window = activity.getWindow();
+
+        window.addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
+        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+        WindowManager.LayoutParams params = window.getAttributes();
+        params.screenBrightness = 1.0f;
+        window.setAttributes(params);   
+    }
+    private void bringToFront(Activity activity) {
+        Intent it = new Intent("intent.my.action");
+        it.setComponent(  new ComponentName( activity.getPackageName(), activity.getClass().getName() )  );
+        it.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        activity.getApplicationContext().startActivity(it);               
+    }
+
+    public void wakeUpAndBringToFront() 
     {
+
         this.cordova.getActivity().runOnUiThread(new Runnable() {
             public void run() {
                 Activity activity = cordova.getActivity();                
-                Window window = activity.getWindow();
-
-                // turn on screen and set brightness to full
-                window.addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
-                window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-
-                WindowManager.LayoutParams params = window.getAttributes();
-                params.screenBrightness = 1.0f;
-                window.setAttributes(params);                
-
-                // wake from sleep
-                PowerManager pm = (PowerManager) activity.getApplicationContext().getSystemService(Context.POWER_SERVICE);
-                PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.ACQUIRE_CAUSES_WAKEUP | PowerManager.SCREEN_BRIGHT_WAKE_LOCK | PowerManager.FULL_WAKE_LOCK, "GinaPlugin Wake");
-                // we acquire the wakelock just for wake up (ACQUIRE_CAUSES_WAKEUP flag)... then we immediatly release
-                wl.acquire();
-                wl.release();
-
-                // bring to front
-                Intent it = new Intent("intent.my.action");
-                it.setComponent(  new ComponentName( activity.getPackageName(), activity.getClass().getName() )  );
-                it.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                activity.getApplicationContext().startActivity(it);               
+                this.wakeUp(activity);
+                this.turnOnDisplay(activity);
+                this.bringToFront(activity);
             }       
         });
     }

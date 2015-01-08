@@ -55,6 +55,6 @@
     },
 
     turnOnDisplay: function() {
-        cordova.exec(null, null, 'GinaPlugin', 'turnOnDisplay', []);
+        cordova.exec(null, null, 'GinaPlugin', 'wakeUpAndBringToFront', []);
     }
 };
