@@ -230,9 +230,9 @@ public class GinaPlugin extends CordovaPlugin {
         this.cordova.getActivity().runOnUiThread(new Runnable() {
             public void run() {
                 Activity activity = cordova.getActivity();                
-                this.wakeUp(activity);
-                this.turnOnDisplay(activity);
-                this.bringToFront(activity);
+                wakeUp(activity);
+                turnOnDisplay(activity);
+                bringToFront(activity);
             }       
         });
     }
