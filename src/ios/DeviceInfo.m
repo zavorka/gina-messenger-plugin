@@ -53,6 +53,11 @@
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
+-(void) doNavigate:(CDVInvokedUrlCommand*)command {
+    NSString* strUrl = [command.arguments objectAtIndex:0];
+    NSURL *url = [NSURL URLWithString:[strUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    [[UIApplication sharedApplication]openURL:url];
+}
 
 
 @end
