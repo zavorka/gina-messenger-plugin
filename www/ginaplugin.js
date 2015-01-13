@@ -1,4 +1,4 @@
-﻿module.exports = {
+module.exports = {
     
     /**
      * Get device IMEI
@@ -122,7 +122,9 @@
             cordova.exec(onSuccess, onError, 'GinaPlugin', 'doNavigate', ["airnavpro://direct-to?coordinates=wgs84-decimal&location=" + lat + "_" + lon + ",0.0," + label]);
         }
         else {
-            cordova.exec(onSuccess, onError, 'GinaPlugin', 'doNavigate', ["http://maps.google.com/maps?daddr=" + lat + "," + lon]);
+            window.location = "http://maps.google.com/maps?daddr=" + lat + "," + lon;
+            if (onSuccess !== null)
+                onSuccess();
         }
     },
 
