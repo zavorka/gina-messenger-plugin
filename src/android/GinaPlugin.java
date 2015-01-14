@@ -57,40 +57,46 @@ public class GinaPlugin extends CordovaPlugin {
                 TelephonyManager telephonyManager = (TelephonyManager) this.cordova.getActivity().getSystemService(Context.TELEPHONY_SERVICE);
                 String IMEI = telephonyManager.getDeviceId();
                 Log.d(LOG_TAG, "getIMEI success: " + IMEI);
-                callbackContext.success(IMEI);               
+                callbackContext.success(IMEI);                            
             }
-            if (ACTION_GET_ZIP.equals(action)) {
+
+            else if (ACTION_GET_ZIP.equals(action)) {
                 String zipPath = args.get(0).toString();
                 String entryPath = args.get(1).toString();
                 this.getZipToBase64(zipPath, entryPath, callbackContext);
             }
-            if (ACTION_DO_NAVIGATE.equals(action)){                       
+
+            else if (ACTION_DO_NAVIGATE.equals(action)){                       
                 return this.doNavigate(args.get(0).toString(), args.get(1).toString(), args.get(2).toString(), callbackContext);
             }
 
-            if (ACTION_LOCK_ORIENTATION.equals(action)) {
+            else if (ACTION_LOCK_ORIENTATION.equals(action)) {
                 this.lockOrientation(args.get(0).toString());
+                
             }
 
-            if (ACTION_UNLOCK_ORIENTATION.equals(action)) {
+            else if (ACTION_UNLOCK_ORIENTATION.equals(action)) {
                 this.unlockOrientation();
-                callbackContext.success();
+                callbackContext.success();        
             }
 
-            if (ACTION_WAKE_UP_AND_BRING_TO_FRONT.equals(action)) {
+            else if (ACTION_WAKE_UP_AND_BRING_TO_FRONT.equals(action)) {
                 this.wakeUpAndBringToFront();
-                callbackContext.success();
-                return true;
+                callbackContext.success();        
             }
-
             
-            callbackContext.error("Invalid action");
-            return false;
+            else {
+                callbackContext.error("Invalid action");
+                return false;
+            }
+            
         } catch(Exception e) {
             System.err.println("Exception: " + e.getMessage());
             callbackContext.error(e.getMessage());
             return false;
         } 
+
+        return true;
     }
 
     private boolean doNavigate(String lat, String lon, String label, CallbackContext callbackContext){
