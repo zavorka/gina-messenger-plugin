@@ -53,7 +53,26 @@
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
--(void) doNavigate:(CDVInvokedUrlCommand*)command {
+-(void) appCanOpen:(CDVInvokedUrlCommand*)command {
+    CDVPluginResult* pluginResult = nil;
+    NSString* appUrl = [command.arguments objectAtIndex:0];
+    
+    if (appUrl != nil && [appUrl length] > 0) {
+        
+        NSURL *url = [NSURL URLWithString: appUrl];
+        BOOL result = [[UIApplication sharedApplication] canOpenURL: url];
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsBool:result];
+        
+    } else {
+        
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+        
+    }
+    
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+}
+
+-(void) openUrl:(CDVInvokedUrlCommand*)command {
     NSString* strUrl = [command.arguments objectAtIndex:0];
     NSURL *url = [NSURL URLWithString:[strUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     [[UIApplication sharedApplication]openURL:url];

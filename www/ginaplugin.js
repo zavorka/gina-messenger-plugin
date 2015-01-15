@@ -18,6 +18,22 @@ module.exports = {
         cordova.exec(null, null, 'GinaPlugin', 'lockOrientation', [orientation]);
     },
 
+    openUrl: function(onSuccess, onError, url) {
+        if (device !== null && device.platform === 'iOS') {
+            cordova.exec(onSuccess, onError, 'GinaPlugin', 'openUrl', [url]);
+        }
+        else {
+            window.location = url;
+            if (onSuccess !== null)
+                onSuccess();
+        }
+
+    },
+
+    canOpen: function (onSuccess, onError, app) {
+        cordova.exec(onSuccess, onError, 'GinaPlugin', 'appCanOpen', [app]);
+    },
+
     doNavigate: function(onSuccess, onError, lat, lon, label) {
 
         var appleMapsNav = function() {
@@ -80,23 +96,24 @@ module.exports = {
                 console.log("fail");
                 if (onError != null)
                     onError();
+                return;
             }
 
             var scheme = schemes.shift();
             console.log(scheme.app);
-            CanOpen(scheme.app + "://", function(canOpen) {
+            cordova.exec(function(canOpen) {
                 if (canOpen) {
-                    cordova.exec(onSuccess, onError, 'GinaPlugin', 'doNavigate', [scheme.urlFn()]);
+                    cordova.exec(onSuccess, onError, 'GinaPlugin', 'openUrl', [scheme.urlFn()]);
                 }
                 else {
                     findNavAppIos(schemes);
                 }
-            });
+            }, null, 'GinaPlugin', 'appCanOpen', [scheme.app + '://']);
         };
 
         console.log('GinaPlugin doNavigate');
-        if (device == null) {
-            window.open("http://maps.google.com/maps?daddr=" + lat + "," + lon);
+        if (device === null) {
+            window.location = "http://maps.google.com/maps?daddr=" + lat + "," + lon;
             if (onSuccess !== null)
                 onSuccess();
         }
@@ -119,7 +136,11 @@ module.exports = {
             onSuccess();
         }
         else if (device.platform === "iOS") {
-            cordova.exec(onSuccess, onError, 'GinaPlugin', 'doNavigate', ["airnavpro://direct-to?coordinates=wgs84-decimal&location=" + lat + "_" + lon + ",0.0," + label]);
+            cordova.exec(
+                onSuccess, onError, 'GinaPlugin', 'openUrl', 
+                ["airnavpro://direct-to?coordinates=wgs84-decimal&location=" 
+                    + lat + "_" + lon + ",0.0," + label]
+            );
         }
         else {
             window.location = "http://maps.google.com/maps?daddr=" + lat + "," + lon;

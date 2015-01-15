@@ -4,8 +4,8 @@
  * This source code is maintained under a proprietary license of the
  * GINA Software s.r.o. company. If you are not its employee, you
  * should not even see these words and the guy who is responsible
- * for making you an access to this file will be punished. And he
- * or she will be punished hard.
+ * for making you an access to this file will be punished. they will
+ * be punished HARD.
  *
  * The main reason of this is that I'm a shitty Objective-C programmer
  * so I don't want anyone to read this bloody code except the people
@@ -31,7 +31,8 @@
 
 // "IMEI" - in fact it will be the identifierForVendor
 -(void) getIMEI: (CDVInvokedUrlCommand*)command;
--(void) doNavigate: (CDVInvokedUrlCommand*)command;
+-(void) openUrl: (CDVInvokedUrlCommand*)command;
+- (void)appCanOpen:(CDVInvokedUrlCommand*)command;
 /*
 -(int) getBatteryLevel: (CDVInvokedUrlCommand*)command;
 -(void) playInputClick: (CDVInvokedUrlCommand*)command;
