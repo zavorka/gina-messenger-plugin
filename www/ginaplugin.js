@@ -150,6 +150,9 @@ module.exports = {
     },
 
     turnOnDisplay: function() {
-        cordova.exec(null, null, 'GinaPlugin', 'wakeUpAndBringToFront', []);
+        if (device.platform.toLowerCase() === 'android')
+        {
+            cordova.exec(null, null, 'GinaPlugin', 'wakeUpAndBringToFront', []);
+        }
     }
 };
