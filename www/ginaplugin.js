@@ -19,10 +19,10 @@ module.exports = {
     },
 
     openUrl: function(onSuccess, onError, url) {
-        if (device? && device.platform === 'iOS') {
+        if (device !== null && device.platform === 'iOS') {
             cordova.exec(onSuccess, onError, 'GinaPlugin', 'openUrl', [url]);
         }
-        else if (device?) {
+        else if (device !== null) {
             navigator.app.loadUrl(url, {openExternal: true});
             if (onSuccess !== null)
                 onSuccess();
