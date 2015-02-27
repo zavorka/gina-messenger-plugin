@@ -268,7 +268,7 @@ public class GinaPlugin extends CordovaPlugin {
                 intent.setData(uri);
             }
             this.cordova.getActivity().startActivity(intent);
-            callbackContext.success(output);
+            callbackContext.success();
         } catch (android.content.ActivityNotFoundException e) {
             Log.d(LOG_TAG, "InAppBrowser: Error loading url "+url+":"+ e.toString());
             callbackContext.error(e.getMessage());
