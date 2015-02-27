@@ -87,7 +87,7 @@ public class GinaPlugin extends CordovaPlugin {
             }
 
             else if (ACTION_OPEN_URL.equals(action)) {
-                this.openUrl(args.get(0).toString());      
+                this.openUrl(callbackContext, args.get(0).toString());
             }
             
             else {
@@ -255,7 +255,7 @@ public class GinaPlugin extends CordovaPlugin {
      * @param usePhoneGap   Load url in PhoneGap webview
      * @return              "" if ok, or error message.
      */
-    public void openUrl(String url) {
+    public void openUrl(CallbackContext callbackContext, String url) {
         try {
             Intent intent = null;
             intent = new Intent(Intent.ACTION_VIEW);
