@@ -46,6 +46,7 @@ public class GinaPlugin extends CordovaPlugin {
     public static final String ACTION_UNLOCK_ORIENTATION = "unlockOrientation";
     public static final String ACTION_DO_NAVIGATE = "doNavigate";
     public static final String ACTION_WAKE_UP_AND_BRING_TO_FRONT = "wakeUpAndBringToFront";
+    public static final String ACTION_OPEN_URL = "openUrl";
     
     
     
@@ -83,6 +84,10 @@ public class GinaPlugin extends CordovaPlugin {
             else if (ACTION_WAKE_UP_AND_BRING_TO_FRONT.equals(action)) {
                 this.wakeUpAndBringToFront();
                 callbackContext.success();        
+            }
+
+            else if (ACTION_OPEN_URL.equals(action)) {
+                this.openUrl(args.get(0).toString());      
             }
             
             else {
@@ -241,5 +246,32 @@ public class GinaPlugin extends CordovaPlugin {
                 bringToFront(activity);
             }       
         });
+    }
+
+    /**
+     * Display a new browser with the specified URL.
+     *
+     * @param url           The url to load.
+     * @param usePhoneGap   Load url in PhoneGap webview
+     * @return              "" if ok, or error message.
+     */
+    public void openUrl(String url) {
+        try {
+            Intent intent = null;
+            intent = new Intent(Intent.ACTION_VIEW);
+            // Omitting the MIME type for file: URLs causes "No Activity found to handle Intent".
+            // Adding the MIME type to http: URLs causes them to not be handled by the downloader.
+            Uri uri = Uri.parse(url);
+            if ("file".equals(uri.getScheme())) {
+                intent.setDataAndType(uri, webView.getResourceApi().getMimeType(uri));
+            } else {
+                intent.setData(uri);
+            }
+            this.cordova.getActivity().startActivity(intent);
+            callbackContext.success(output);
+        } catch (android.content.ActivityNotFoundException e) {
+            Log.d(LOG_TAG, "InAppBrowser: Error loading url "+url+":"+ e.toString());
+            callbackContext.error(e.getMessage());
+        }
     }
 }
