@@ -32,7 +32,8 @@
 // "IMEI" - in fact it will be the identifierForVendor
 -(void) getIMEI: (CDVInvokedUrlCommand*)command;
 -(void) openUrl: (CDVInvokedUrlCommand*)command;
-- (void)appCanOpen:(CDVInvokedUrlCommand*)command;
+-(void) appCanOpen:(CDVInvokedUrlCommand*)command;
+-(void) isDebug: (CDVInvokedUrlCommand*) command;
 /*
 -(int) getBatteryLevel: (CDVInvokedUrlCommand*)command;
 -(void) playInputClick: (CDVInvokedUrlCommand*)command;

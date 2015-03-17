@@ -30,6 +30,16 @@ module.exports = {
 
     },
 
+    isDebug: function(onSuccess, onError, url) {
+        if (device.toLowerCase() === 'ios') {
+            cordova.exec(onSuccess, onError, 'GinaPlugin', 'isDebug', []);
+        }
+        else {
+            if (onSuccess !== null)
+               onSuccess(false);
+        }
+    },
+
     canOpen: function (onSuccess, onError, app) {
         cordova.exec(onSuccess, onError, 'GinaPlugin', 'appCanOpen', [app]);
     },

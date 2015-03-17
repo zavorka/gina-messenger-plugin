@@ -32,6 +32,17 @@
     return self;
 }
 
+-(void) isDebug: (CDVInvokedUrlCommand*) command {
+    BOOL debug = false;
+#ifdef DEBUG
+    debug = true;
+#else
+    debug = false;
+#endif
+    CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsBool:debug];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+}
+
 -(void) getIMEI:(CDVInvokedUrlCommand*)command {
     NSUUID *id = [currentDevice identifierForVendor];
     
