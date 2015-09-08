@@ -47,15 +47,13 @@
 
         <framework src="UIKit.framework" />
     </platform>
-    
+   
     <!-- windows -->
     <platform name="windows">
-        <config-file target="config.xml" parent="/*">
-            <feature name="GinaPlugin">
-                <param name="windows-package" value="GinaPlugin" />
-            </feature>
-        </config-file>
-
-        <source-file src="src/windows/GinaPlugin.cs" />
+        <js-module src="src/windows/GinaPluginProxy.js" name="GinaProxy">
+            <merges target="" />
+        </js-module>
+        
+        <framework src="src/windows/GinaPlugin.dll" arch="x64" />
     </platform>
 </plugin>
