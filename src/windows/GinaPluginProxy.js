@@ -1,7 +1,5 @@
 cordova.commandProxy.add("GinaPlugin", {
-    getIMEI : function(successCallback, errorCallback) {
-        var pl = GinaPlugin;
-    
+    getIMEI : function(successCallback, errorCallback) {    
         var res = GinaPlugin.GinaPluginImpl.getIMEI();
         
         if (res.indexOf("Error") == 0) {
