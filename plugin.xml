@@ -60,6 +60,6 @@
             <merges target="" />
         </js-module>
         
-        <framework src="src/windows/GinaPlugin.dll" custom="true" />
+        <framework src="src/windows/GinaPlugin.winmd" custom="true" />
     </platform>
 </plugin>
