@@ -50,6 +50,12 @@
    
     <!-- windows -->
     <platform name="windows">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="GinaPlugin">
+                <param name="windows-package" value="GinaPlugin"/>
+            </feature>
+        </config-file>
+    
         <js-module src="src/windows/GinaPluginProxy.js" name="GinaProxy">
             <merges target="" />
         </js-module>
