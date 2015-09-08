@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Runtime.Serialization;
+using WPCordovaClassLib.Cordova;
+using WPCordovaClassLib.Cordova.Commands;
 
-namespace WPCordovaClassLib.Cordova.Commands
+namespace Cordova.Extension.Commands
 {
     public class GinaPlugin : BaseCommand
     {
