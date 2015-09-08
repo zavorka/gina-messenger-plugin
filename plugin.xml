@@ -46,5 +46,16 @@
         <source-file src="src/ios/DeviceInfo.m" />
 
         <framework src="UIKit.framework" />
-    </platform>    
+    </platform>
+    
+    <!-- windows -->
+    <platform name="windows">
+        <config-file target="config.xml" parent="/*">
+            <feature name="GinaPlugin">
+                <param name="windows-package" value="GinaPlugin" />
+            </feature>
+        </config-file>
+
+        <source-file src="src/windows/GinaPlugin.cs" />
+    </platform>
 </plugin>
