@@ -8,7 +8,7 @@ cordova.commandProxy.add("GinaPlugin", {
         else {
             successCallback(res);
         }
-    }
+    },
     
     lockOrientation : function(successCallback, errorCallback, orientation) {
         console.log('lock orientation ' + orientation);
