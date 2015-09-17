@@ -11,6 +11,10 @@ cordova.commandProxy.add("GinaPlugin", {
     },
     
     lockOrientation : function(successCallback, errorCallback, orientation) {
-        console.log('lock orientation ' + orientation);
+        if (orientation == "landscape") {
+            Windows.Graphics.Display.DisplayInformation.autoRotationPreferences = Windows.Graphics.Display.DisplayOrientations.landscape;
+        } else if (orientation == "portrait") {
+            Windows.Graphics.Display.DisplayInformation.autoRotationPreferences = Windows.Graphics.Display.DisplayOrientations.portrait;
+        }
     }
 });
