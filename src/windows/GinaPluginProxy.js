@@ -18,7 +18,7 @@ cordova.commandProxy.add("GinaPlugin", {
         }
     },
     
-    preventSleep: function() {
+    preventSleep: function(successCallback, errorCallback) {
         var res = GinaPlugin.GinaPluginImpl.preventSleep();
         
         if (res == 0) {
