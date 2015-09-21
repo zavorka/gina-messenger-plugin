@@ -20,7 +20,7 @@ module.exports = {
     
     preventSleep: function() {
         cordova.exec(null, null, 'GinaPlugin', 'preventSleep', []);
-    }
+    },
 
     openUrl: function(onSuccess, onError, url) {
         if (device !== null) {
