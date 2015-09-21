@@ -17,6 +17,10 @@ module.exports = {
     lockOrientation: function(orientation) {
         cordova.exec(null, null, 'GinaPlugin', 'lockOrientation', [orientation]);
     },
+    
+    preventSleep: function() {
+        cordova.exec(null, null, 'GinaPlugin', 'preventSleep', []);
+    }
 
     openUrl: function(onSuccess, onError, url) {
         if (device !== null) {

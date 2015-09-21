@@ -16,5 +16,16 @@ cordova.commandProxy.add("GinaPlugin", {
         } else if (orientation == "portrait") {
             Windows.Graphics.Display.DisplayInformation.autoRotationPreferences = Windows.Graphics.Display.DisplayOrientations.portrait;
         }
+    },
+    
+    preventSleep: function() {
+        var res = GinaPlugin.GinaPluginImpl.preventSleep();
+        
+        if (res.indexOf("Error") == 0) {
+            errorCallback(res);
+        }
+        else {
+            successCallback(res);
+        }
     }
 });
