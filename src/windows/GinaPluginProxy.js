@@ -27,5 +27,16 @@ cordova.commandProxy.add("GinaPlugin", {
         else {
             successCallback(res);
         }
+    },
+    
+    openUrl: function(successCallback, errorCallback, Uri) {
+        var res = GinaPlugin.GinaPluginImpl.openUrl(Uri);
+        
+        if (res == 0) {
+            errorCallback(res);
+        }
+        else {
+            successCallback(res);
+        }
     }
 });
