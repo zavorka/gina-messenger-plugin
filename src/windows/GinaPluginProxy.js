@@ -1,9 +1,23 @@
 cordova.commandProxy.add("GinaPlugin", {
     getIMEI : function(successCallback, errorCallback) {
-	callback = function() { successCallback(request.responseText); }
-    
+	// callbacks
+	loadCallback = function() { 
+	    if (request.responseText !== "") {
+	       successCallback(request.responseText);
+            } else {
+	       errorCallback("");
+	    }
+	}
+		
+	failCallback = function() {
+	    errorCallback("");	    
+	}  
+
+	// request itself     
         request = new XMLHttpRequest();
-      	request.addEventListener("load", callback);
+      	request.addEventListener("load", loadCallback);
+	request.addEventListener("error", failCallback);
+	request.addEventListener("abort", failCallback);
       	request.open("GET", "http://localhost:8888/action/getimei");
       	request.send();
     },
