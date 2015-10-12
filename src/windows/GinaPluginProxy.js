@@ -1,13 +1,11 @@
 cordova.commandProxy.add("GinaPlugin", {
-    getIMEI : function(successCallback, errorCallback) {    
-        var res = GinaPlugin.GinaPluginImpl.getIMEI();
-        
-        if (res.indexOf("Error") == 0) {
-            errorCallback(res);
-        }
-        else {
-            successCallback(res);
-        }
+    getIMEI : function(successCallback, errorCallback) {
+	callback = function() { successCallback(request.responseText); }
+    
+        request = new XMLHttpRequest();
+      	request.addEventListener("load", callback);
+      	request.open("GET", "http://localhost:8888/action/getimei");
+      	request.send();
     },
     
     lockOrientation : function(successCallback, errorCallback, orientation) {
@@ -16,6 +14,8 @@ cordova.commandProxy.add("GinaPlugin", {
         } else if (orientation == "portrait") {
             Windows.Graphics.Display.DisplayInformation.autoRotationPreferences = Windows.Graphics.Display.DisplayOrientations.portrait;
         }
+
+	successCallback();
     },
     
     preventSleep: function(successCallback, errorCallback) {
