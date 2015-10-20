@@ -44,19 +44,5 @@ namespace GinaPlugin
 
             return result;
         }
-
-
-        public static bool openUrl(string Uri) {
-            var options = new LauncherOptions();
-            // options.DesiredRemainingView = ViewSizePreference.UseHalf;
-
-            Task<bool> t = Task.Run( async ()=>
-            {
-                return await Windows.System.Launcher.LaunchUriAsync(new Uri(Uri), options);
-            }); 
-
-            t.Wait();
-            return t.Result;
-        }
     }
 }

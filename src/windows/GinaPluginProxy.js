@@ -44,33 +44,17 @@ cordova.commandProxy.add("GinaPlugin", {
     },
     
     openUrl: function(successCallback, errorCallback, Uri) {
-	var uriToLaunch = "http://www.bing.com";
+        var uri = new Windows.Foundation.Uri(Uri);
+        var options = new Windows.System.LauncherOptions();
 
-        // Create a Uri object from a URI string 
-        var uri = new Windows.Foundation.Uri(uriToLaunch);
-
-       // Launch the URI with a warning prompt
-       var options = new Windows.System.LauncherOptions();
-       options.treatAsUntrusted = true;
-
-       Windows.System.Launcher.launchUriAsync(uri, options).then(
-         function (success) {
-             if (success) {
-               // URI launched
-            } else {
-         //  URI launch failed
-         }
-       });
-
-
-      //  var res = GinaPlugin.GinaPluginImpl.openUrl(Uri);
-        
-      //  if (res == 0) {
-      //      errorCallback(res);
-      //  }
-      //  else {
-      //      successCallback(res);
-      //  }
-      return true;
+        Windows.System.Launcher.launchUriAsync(uri, options).then(
+           function (success) {
+              if (success) {
+                
+              } else {
+                  errorCallback(false);
+              }
+           }
+	);
     }
 });
