@@ -48,7 +48,7 @@ namespace GinaPlugin
 
         public static bool openUrl(string Uri) {
             var options = new LauncherOptions();
-            options.DesiredRemainingView = ViewSizePreference.UseHalf;
+            // options.DesiredRemainingView = ViewSizePreference.UseHalf;
 
             Task<bool> t = Task.Run( async ()=>
             {
