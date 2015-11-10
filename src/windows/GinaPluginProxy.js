@@ -46,6 +46,7 @@ cordova.commandProxy.add("GinaPlugin", {
     openUrl: function(successCallback, errorCallback, Uri) {
         var uri = new Windows.Foundation.Uri(Uri);
         var options = new Windows.System.LauncherOptions();
+	options.desiredRemainingView = Windows.UI.ViewManagement.ViewSizePreference.useHalf;
 
         Windows.System.Launcher.launchUriAsync(uri, options).then(
            function (success) {

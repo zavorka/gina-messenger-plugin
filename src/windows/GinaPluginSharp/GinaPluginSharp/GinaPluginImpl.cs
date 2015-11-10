@@ -35,6 +35,8 @@ namespace GinaPlugin
         public static bool preventSleep() {
             bool result;
 
+            Di
+
             // try this for vista, it will fail on XP
             result = (SetThreadExecutionState(EXECUTION_STATE.ES_CONTINUOUS | EXECUTION_STATE.ES_SYSTEM_REQUIRED | EXECUTION_STATE.ES_AWAYMODE_REQUIRED) != 0);
             
