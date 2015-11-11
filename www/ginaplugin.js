@@ -168,5 +168,12 @@ module.exports = {
         {
             cordova.exec(null, null, 'GinaPlugin', 'wakeUpAndBringToFront', []);
         }
-    }
+    },
+
+    getProcessId: function() {
+        if (device.platform.toLowerCase() === 'windows') {
+            cordova.exec(null, null, 'GinaPlugin', 'getProcessId', []);
+        }
+    },
+
 };

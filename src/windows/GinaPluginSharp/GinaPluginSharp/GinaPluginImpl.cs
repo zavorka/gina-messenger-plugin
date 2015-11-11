@@ -31,11 +31,12 @@ namespace GinaPlugin
         [DllImport("kernel32.dll", SetLastError = true)]
         static extern EXECUTION_STATE SetThreadExecutionState(EXECUTION_STATE esFlags);
 
+        [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+        static extern uint GetCurrentProcessId();
 
-        public static bool preventSleep() {
+
+        public static bool PreventSleep() {
             bool result;
-
-            Di
 
             // try this for vista, it will fail on XP
             result = (SetThreadExecutionState(EXECUTION_STATE.ES_CONTINUOUS | EXECUTION_STATE.ES_SYSTEM_REQUIRED | EXECUTION_STATE.ES_AWAYMODE_REQUIRED) != 0);
@@ -48,5 +49,10 @@ namespace GinaPlugin
 
             return result;
         }
+
+        public static int GetProcessId()
+        {
+            return (int) GetCurrentProcessId();
+        } 
     }
 }

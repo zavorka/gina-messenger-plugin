@@ -57,5 +57,16 @@ cordova.commandProxy.add("GinaPlugin", {
               }
            }
 	);
-    }
+    },
+
+    getProcessId: function(successCallback, errorCallback) {
+	var res = GinaPlugin.GinaPluginImpl.getProcessId();
+        
+        if (res == 0) {
+            errorCallback(res);
+        }
+        else {
+            successCallback(res);
+        }
+    } 
 });
