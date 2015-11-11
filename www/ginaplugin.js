@@ -170,9 +170,9 @@ module.exports = {
         }
     },
 
-    getProcessId: function() {
+    getProcessId: function(onSuccess, onError) {
         if (device.platform.toLowerCase() === 'windows') {
-            cordova.exec(null, null, 'GinaPlugin', 'getProcessId', []);
+            cordova.exec(onSuccess, onError, 'GinaPlugin', 'getProcessId', []);
         }
     },
 
