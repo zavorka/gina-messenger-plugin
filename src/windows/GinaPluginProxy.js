@@ -51,7 +51,7 @@ cordova.commandProxy.add("GinaPlugin", {
         Windows.System.Launcher.launchUriAsync(uri, options).then(
            function (success) {
               if (success) {
-                
+		  successCallback(true);                 
               } else {
                   errorCallback(false);
               }
