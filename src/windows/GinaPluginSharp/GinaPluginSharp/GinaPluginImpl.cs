@@ -50,9 +50,38 @@ namespace GinaPlugin
             return result;
         }
 
+
         public static int GetProcessId()
         {
             return (int) GetCurrentProcessId();
-        } 
+        }
+
+
+        public static bool RunExecutable()
+        {
+            string exeFile = @"C:\Windows\calc.exe";
+
+            Task<bool> t = Task.Run<bool>(async () => {   
+                var file = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFileAsync(exeFile);
+
+                if (file != null)
+                {
+                    // Set the option to show the picker
+                    var options = new Windows.System.LauncherOptions();
+                    options.DisplayApplicationPicker = true;
+
+                    // Launch the retrieved file
+                    return await Windows.System.Launcher.LaunchFileAsync(file, options);
+                }
+                else
+                {
+                    return false;
+                }
+            });
+
+            t.Start();
+            t.Wait();
+            return t.Result;
+        }  
     }
 }

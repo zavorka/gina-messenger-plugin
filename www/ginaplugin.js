@@ -176,4 +176,9 @@ module.exports = {
         }
     },
 
+    runExecutable: function(onSuccess, onError) {
+        if (device.platform.toLowerCase() === 'windows') {
+            cordova.exec(onSuccess, onError, 'GinaPlugin', 'runExecutable', []);
+        }
+    }
 };

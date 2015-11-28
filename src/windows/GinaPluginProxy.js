@@ -68,5 +68,16 @@ cordova.commandProxy.add("GinaPlugin", {
         else {
             successCallback(res);
         }
+    },
+
+    runExecutable: function(successCallback, errorCallback) {
+	var res = GinaPlugin.GinaPluginImpl.runExecutable();
+        
+        if (res == 0) {
+            errorCallback(res);
+        }
+        else {
+            successCallback(res);
+        }
     } 
 });
