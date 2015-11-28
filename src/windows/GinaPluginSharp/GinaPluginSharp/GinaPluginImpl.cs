@@ -79,7 +79,6 @@ namespace GinaPlugin
                 }
             });
 
-            t.Start();
             t.Wait();
             return t.Result;
         }  
