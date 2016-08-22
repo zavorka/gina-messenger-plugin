@@ -21,15 +21,9 @@
 
 @synthesize currentDevice;
 
--(CDVPlugin*) initWithWebView:(UIWebView*) theWebView
+-(void) pluginInitialize
 {
-    self = (GinaPlugin*)[super initWithWebView:theWebView];
-    
-    if (self) {
-        currentDevice = [UIDevice currentDevice];
-    }
-    
-    return self;
+    currentDevice = [UIDevice currentDevice];
 }
 
 -(void) isDebug: (CDVInvokedUrlCommand*) command {
